@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types
 
 import 'dart:io';
+import 'dart:math';
 
 class Aventurier {
   // Attributs
@@ -64,8 +65,8 @@ class piege extends obstacle {
   Future<void> affronter(Aventurier joueur) async {
     print("Un piège se déclenche...");
     await Future.delayed(Duration(seconds: 2));
-
-    bool succes = random().nextbool();
+    var random = Random();
+    bool succes = random.nextBool();
     if (succes) {
       print("Tu as reussi à éviter le piège !");
     } else {
@@ -109,7 +110,7 @@ class lieu {
   // Constructeur
   lieu(this.nom, this.obstacles);
 
-  // Methodes 
+  // Methodes
   Future<void> explorer(Aventurier joueur) async {
     print("Bienvenue à $nom");
     for (var obstacle in obstacles) {
@@ -126,14 +127,17 @@ void main() async {
   Aventurier joueur = Aventurier(nom ?? "Héros");
 
   lieu foretMystique = lieu("Forêt Mystique", [
-    enigme("Je suis toujours devant toi, mais tu ne peux jamais me voir. Qui suis-je ?", "Le futur"),
+    enigme(
+        "Je suis toujours devant toi, mais tu ne peux jamais me voir. Qui suis-je ?",
+        "Le futur"),
     piege(),
     gardien(),
   ]);
 
   lieu templeAncien = lieu("Temple Ancien", [
     piege(),
-    enigme("Plus tu en prends, plus tu en laisses derrière toi. Que suis-je ?", "Des pas"),
+    enigme("Plus tu en prends, plus tu en laisses derrière toi. Que suis-je ?",
+        "Des pas"),
     gardien(),
   ]);
 
